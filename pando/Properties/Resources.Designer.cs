@@ -65,7 +65,7 @@ namespace pando.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap Panda_96 {
             get {
-                object obj = ResourceManager.GetObject("Panda-96", resourceCulture);
+                object obj = ResourceManager.GetObject("Panda_96", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

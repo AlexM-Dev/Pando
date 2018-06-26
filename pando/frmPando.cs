@@ -134,6 +134,10 @@ namespace pando {
                 OutputProcessing.Save(fileName, output, false);
                 assignProcessing(false);
 
+                MessageBox.Show("Saved file. You can find it in the same " +
+                    "directory as your input file.", "Saved!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 this.InvokeEx(c => this.Close());
             });
             processor.Start();

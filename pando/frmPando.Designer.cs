@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPando));
             this.thcMain = new pandoCommons.Discord_ThemeContainer();
             this.btnCancel = new pandoCommons.Discord_Button();
             this.btnSave = new pandoCommons.Discord_Button();
@@ -190,6 +191,7 @@
             this.Controls.Add(this.thcMain);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "frmPando";
