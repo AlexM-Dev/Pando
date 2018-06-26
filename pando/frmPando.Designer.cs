@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPando));
             this.thcMain = new pandoCommons.Discord_ThemeContainer();
+            this.picPando = new System.Windows.Forms.PictureBox();
             this.btnCancel = new pandoCommons.Discord_Button();
             this.btnSave = new pandoCommons.Discord_Button();
             this.btnSelectImage = new pandoCommons.Discord_Button();
@@ -34,15 +35,14 @@
             this.txtKey = new pandoCommons.Discord_TextBox();
             this.chkEncrypt = new pandoCommons.Discord_CheckBox();
             this.cbxMain = new pandoCommons.Discord_ControlBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.thcMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPando)).BeginInit();
             this.SuspendLayout();
             // 
             // thcMain
             // 
             this.thcMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(49)))), ((int)(((byte)(54)))));
-            this.thcMain.Controls.Add(this.pictureBox1);
+            this.thcMain.Controls.Add(this.picPando);
             this.thcMain.Controls.Add(this.btnCancel);
             this.thcMain.Controls.Add(this.btnSave);
             this.thcMain.Controls.Add(this.btnSelectImage);
@@ -64,6 +64,16 @@
             this.thcMain.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.thcMain.TabIndex = 11;
             this.thcMain.Text = "Pando";
+            // 
+            // picPando
+            // 
+            this.picPando.Image = ((System.Drawing.Image)(resources.GetObject("picPando.Image")));
+            this.picPando.Location = new System.Drawing.Point(13, 145);
+            this.picPando.Name = "picPando";
+            this.picPando.Size = new System.Drawing.Size(48, 48);
+            this.picPando.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picPando.TabIndex = 12;
+            this.picPando.TabStop = false;
             // 
             // btnCancel
             // 
@@ -173,16 +183,6 @@
             this.cbxMain.Size = new System.Drawing.Size(100, 25);
             this.cbxMain.TabIndex = 11;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::pando.Properties.Resources.Panda_96;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 145);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            // 
             // frmPando
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -200,7 +200,7 @@
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPando_FormClosing);
             this.thcMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPando)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -216,6 +216,6 @@
         private pandoCommons.Discord_Button btnSelectImage;
         private pandoCommons.Discord_Button btnCancel;
         private pandoCommons.Discord_Button btnSave;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picPando;
     }
 }

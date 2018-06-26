@@ -16,6 +16,14 @@ namespace pandoCommons {
             return baseFile;
         }
 
+        public static byte[] InValue(string encoded, string key, bool enc) {
+            string input = encoded.Trim(); // Remove any buffer.
+
+            if (enc) input = Encryption.Decrypt(input, key);
+
+            return Convert.FromBase64String(input);
+        }
+
         public static Color CharToColor(char c, bool r, bool g, bool b, Color? p2 = null) {
             // This function should only be called with radiobutton
             // outputs. But oh well.
@@ -44,6 +52,13 @@ namespace pandoCommons {
             }
 
             return cl;
+        }
+
+        public static char ColorToChar(Color c, bool r, bool g, bool b) {
+            int i = r ? c.R :
+                g ? c.G :
+                b ? c.B : 0;
+            return (char)i;
         }
 
         // https://www.codeproject.com/Articles/191424/Resizing-an-Image-On-The-Fly-using-NET
