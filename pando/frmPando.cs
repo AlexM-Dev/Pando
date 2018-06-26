@@ -105,8 +105,6 @@ namespace pando {
             lOut.LockBits();
 
             Thread processor = new Thread(f => {
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
                 for (int i = 0; i < file.Length; i++) {
                     // We need a formula.
                     // i % a (i MOD a) = gets the remainder - index in the line.

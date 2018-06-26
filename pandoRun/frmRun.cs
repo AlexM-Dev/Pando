@@ -63,23 +63,28 @@ namespace pandoRun {
                     }
                     lRead.UnlockBits();
 
-                    // Decrypt (if necessary) and read file to byte array.
-                    byte[] file = InputProcessing.InValue(reader.ToString(),
-                        key, decrypt);
+                    try {
+                        // Decrypt (if necessary) and read file to byte array.
+                        byte[] file = InputProcessing.InValue(reader.ToString(),
+                            key, decrypt);
 
-                    // Write file down.
-                    tempFile = Path.GetTempFileName() + "." + extension;
-                    File.WriteAllBytes(tempFile, file);
+                        // Write file down.
+                        tempFile = Path.GetTempFileName() + "." + extension;
+                        File.WriteAllBytes(tempFile, file);
 
-                    this.InvokeEx(c => {
-                        btnRun.Text = "Finish";
+                        this.InvokeEx(c => {
+                            btnRun.Text = "Finish";
+                            assignProcessing(false);
+                        });
+
+                        var psi = new ProcessStartInfo(tempFile);
+                        psi.UseShellExecute = true;
+                        Process.Start(psi);
+                    } catch (Exception ex) {
+                        MessageBox.Show(ex.Message, "Error", 
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                         assignProcessing(false);
-                    });
-
-                    var psi = new ProcessStartInfo(tempFile);
-                    psi.UseShellExecute = true;
-
-                    Process.Start(psi);
+                    }
                 });
                 processor.Start();
             } else if (btnRun.Text == "Finish") {
