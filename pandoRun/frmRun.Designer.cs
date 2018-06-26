@@ -26,7 +26,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRun));
             this.thcMain = new pandoCommons.Discord_ThemeContainer();
             this.btnRun = new pandoCommons.Discord_Button();
-            this.txtFilename = new pandoCommons.Discord_TextBox();
+            this.txtExt = new pandoCommons.Discord_TextBox();
             this.rdbB = new pandoCommons.Discord_RadioButton();
             this.rdbG = new pandoCommons.Discord_RadioButton();
             this.rdbR = new pandoCommons.Discord_RadioButton();
@@ -34,6 +34,7 @@
             this.chkDecrypt = new pandoCommons.Discord_CheckBox();
             this.picPando = new System.Windows.Forms.PictureBox();
             this.cbxMain = new pandoCommons.Discord_ControlBox();
+            this.discord_Label1 = new pandoCommons.Discord_Label();
             this.thcMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPando)).BeginInit();
             this.SuspendLayout();
@@ -41,8 +42,9 @@
             // thcMain
             // 
             this.thcMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(49)))), ((int)(((byte)(54)))));
+            this.thcMain.Controls.Add(this.discord_Label1);
             this.thcMain.Controls.Add(this.btnRun);
-            this.thcMain.Controls.Add(this.txtFilename);
+            this.thcMain.Controls.Add(this.txtExt);
             this.thcMain.Controls.Add(this.rdbB);
             this.thcMain.Controls.Add(this.rdbG);
             this.thcMain.Controls.Add(this.rdbR);
@@ -78,22 +80,22 @@
             this.btnRun.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
-            // txtFilename
+            // txtExt
             // 
-            this.txtFilename.BackColor = System.Drawing.Color.Transparent;
-            this.txtFilename.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.txtFilename.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
-            this.txtFilename.Image = null;
-            this.txtFilename.Location = new System.Drawing.Point(13, 34);
-            this.txtFilename.MaxLength = 32767;
-            this.txtFilename.Multiline = false;
-            this.txtFilename.Name = "txtFilename";
-            this.txtFilename.ReadOnly = false;
-            this.txtFilename.Size = new System.Drawing.Size(279, 41);
-            this.txtFilename.TabIndex = 22;
-            this.txtFilename.Text = "<filename>";
-            this.txtFilename.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtFilename.UseSystemPasswordChar = false;
+            this.txtExt.BackColor = System.Drawing.Color.Transparent;
+            this.txtExt.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.txtExt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.txtExt.Image = null;
+            this.txtExt.Location = new System.Drawing.Point(79, 34);
+            this.txtExt.MaxLength = 32767;
+            this.txtExt.Multiline = false;
+            this.txtExt.Name = "txtExt";
+            this.txtExt.ReadOnly = false;
+            this.txtExt.Size = new System.Drawing.Size(213, 41);
+            this.txtExt.TabIndex = 22;
+            this.txtExt.Text = "exe";
+            this.txtExt.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtExt.UseSystemPasswordChar = false;
             // 
             // rdbB
             // 
@@ -172,6 +174,18 @@
             this.cbxMain.Size = new System.Drawing.Size(100, 25);
             this.cbxMain.TabIndex = 0;
             // 
+            // discord_Label1
+            // 
+            this.discord_Label1.AutoSize = true;
+            this.discord_Label1.BackColor = System.Drawing.Color.Transparent;
+            this.discord_Label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.discord_Label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(181)))));
+            this.discord_Label1.Location = new System.Drawing.Point(13, 45);
+            this.discord_Label1.Name = "discord_Label1";
+            this.discord_Label1.Size = new System.Drawing.Size(60, 15);
+            this.discord_Label1.TabIndex = 24;
+            this.discord_Label1.Text = "Extension:";
+            // 
             // frmRun
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,6 +198,7 @@
             this.Text = "Run";
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.thcMain.ResumeLayout(false);
+            this.thcMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPando)).EndInit();
             this.ResumeLayout(false);
 
@@ -199,7 +214,8 @@
         private pandoCommons.Discord_RadioButton rdbR;
         private pandoCommons.Discord_TextBox txtKey;
         private pandoCommons.Discord_CheckBox chkDecrypt;
-        private pandoCommons.Discord_TextBox txtFilename;
+        private pandoCommons.Discord_TextBox txtExt;
         private pandoCommons.Discord_Button btnRun;
+        private pandoCommons.Discord_Label discord_Label1;
     }
 }
