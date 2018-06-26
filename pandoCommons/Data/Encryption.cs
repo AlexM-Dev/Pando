@@ -13,7 +13,7 @@ namespace pandoCommons {
 
             // Set your salt here, change it to meet your flavor:
             // The salt bytes must be at least 8 bytes.
-            byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            byte[] saltBytes = new byte[] { 255, 22, 78, 108, 218, 60, 36, 88 };
 
             using (MemoryStream ms = new MemoryStream()) {
                 using (RijndaelManaged AES = new RijndaelManaged()) {
