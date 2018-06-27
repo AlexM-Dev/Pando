@@ -61,7 +61,8 @@ namespace pandoRun {
                 });
 
                 await Processor.BitmapToFile(fileCode, key, decrypt,
-                    r, g, b, extension, completed);
+                    r, g, b, extension, completed,
+                    () => { this.InvokeEx(f => assignProcessing(false)); });
             } else if (btnRun.Text == "Finish") {
                 try {
                     File.Delete(tempFile);

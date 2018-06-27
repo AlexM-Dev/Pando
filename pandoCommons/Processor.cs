@@ -74,7 +74,7 @@ namespace pandoCommons {
         }
         public async static Task BitmapToFile(Bitmap fileCode, string key, 
             bool decrypt, bool r, bool g, bool b, string extension, 
-            Action<string, byte[]> onComplete) {
+            Action<string, byte[]> onComplete, Action onFail) {
 
             await Task.Run(() => {
                 // StringBuilder for reading the string. (Base64 of File)
@@ -105,6 +105,7 @@ namespace pandoCommons {
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    onFail.Invoke();
                 }
             });
         }
