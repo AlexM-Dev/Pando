@@ -9,6 +9,7 @@ using System.Drawing;
 
 namespace pandoRun {
     class Program {
+        [STAThread()]
         static void Main(string[] args) {
             if (args.Length == 0) return;
 

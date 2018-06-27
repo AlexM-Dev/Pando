@@ -28,7 +28,7 @@ namespace pandoCommons {
 
                     using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write)) {
                         cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
-                        cs.Close();
+                        // cs.Close();
                     }
                     encryptedBytes = ms.ToArray();
                 }
@@ -57,7 +57,7 @@ namespace pandoCommons {
 
                     using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Write)) {
                         cs.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);
-                        cs.Close();
+                        // cs.Close();
                     }
                     decryptedBytes = ms.ToArray();
                 }

@@ -55,8 +55,8 @@ namespace pandoCommons {
 
                 // Copy data from pointer to array
                 Marshal.Copy(Iptr, Pixels, 0, Pixels.Length);
-            } catch (Exception ex) {
-                throw ex;
+            } catch {
+                throw;
             }
         }
 
@@ -70,8 +70,8 @@ namespace pandoCommons {
 
                 // Unlock bitmap data
                 source.UnlockBits(bitmapData);
-            } catch (Exception ex) {
-                throw ex;
+            } catch {
+                throw;
             }
         }
 
