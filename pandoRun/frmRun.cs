@@ -36,13 +36,11 @@ namespace pandoRun {
         private async void btnRun_Click(object sender, EventArgs e) {
             if (btnRun.Text == "Run") {
                 // Control values.
-                bool r = rdbR.Checked;
-                bool g = rdbG.Checked;
-                bool b = rdbB.Checked;
 
                 bool decrypt = chkDecrypt.Checked;
                 string key = txtKey.Text;
                 string extension = txtExt.Text;
+                string pattern = txtPattern.Text;
 
                 assignProcessing(true);
 
@@ -61,7 +59,7 @@ namespace pandoRun {
                 });
 
                 await Processor.BitmapToFile(fileCode, key, decrypt,
-                    r, g, b, extension, completed,
+                    pattern, extension, completed,
                     () => { this.InvokeEx(f => assignProcessing(false)); });
             } else if (btnRun.Text == "Finish") {
                 try {

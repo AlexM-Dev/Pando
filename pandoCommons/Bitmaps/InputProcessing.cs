@@ -85,5 +85,23 @@ namespace pandoCommons {
             }
             return newImage;
         }
+
+        public static List<Tuple<bool, bool, bool>> GetChannels(string pattern, string data) {
+            var channels = new List<Tuple<bool, bool, bool>>();
+            int len = pattern.Length;
+            pattern = pattern.ToUpper();
+            for (int i = 0; i < data.Length; i++) {
+                char c = pattern[i % len];
+                channels.Add(new Tuple<bool, bool, bool>(
+                    c == 'R', c == 'G', c == 'B'));
+            }
+            return channels;
+        }
+
+        public static Tuple<bool, bool, bool> GetChannel(string pattern, int pos) {
+            int len = pattern.Length;
+            char c = pattern[pos % len];
+            return new Tuple<bool, bool, bool>(c == 'R', c == 'G', c == 'B');
+        }
     }
 }

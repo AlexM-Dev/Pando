@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace pandoCommons {
     public class Processor {
         public async static Task FileToBitmap(bool encrypt, string pKey,
-            bool r, bool g, bool b, byte[] fileCode, Bitmap img,
+            string pattern, byte[] fileCode, Bitmap img,
             Action<Bitmap> onComplete) {
             // Encrypts file if needed to be, and returns a base64 value.
             string file = InputProcessing.OutValue(fileCode, pKey, encrypt);
@@ -45,7 +45,9 @@ namespace pandoCommons {
             lOut.LockBits();
 
             await Task.Run(() => {
+                var channels = InputProcessing.GetChannels(pattern, file);
                 for (int i = 0; i < file.Length; i++) {
+                    var channel = channels[i];
                     // We need a formula.
                     // i % a (i MOD a) = gets the remainder - index in the line.
                     // i / a (i DIV a) = gets the division - line index.
@@ -57,7 +59,8 @@ namespace pandoCommons {
                     //      -> Character in file string.
                     //      -> What channel (r, g, b)
                     //      -> Pixel of image (being used?).
-                    var c = InputProcessing.CharToColor(file[i], r, g, b,
+                    var c = InputProcessing.CharToColor(file[i], channel.Item1,
+                        channel.Item2, channel.Item3,
                          (useBmp ? lBmp.GetPixel(x, y) : (Color?)null));
 
                     // Set converted color.
@@ -73,7 +76,7 @@ namespace pandoCommons {
             });
         }
         public async static Task BitmapToFile(Bitmap fileCode, string key, 
-            bool decrypt, bool r, bool g, bool b, string extension, 
+            bool decrypt, string pattern, string extension, 
             Action<string, byte[]> onComplete, Action onFail) {
 
             await Task.Run(() => {
@@ -88,8 +91,10 @@ namespace pandoCommons {
                 lRead.LockBits();
                 for (int y = 0; y < lRead.Height; y++) {
                     for (int x = 0; x < lRead.Width; x++) {
+                        int pos = lRead.Width * y + x;
+                        var ch = InputProcessing.GetChannel(pattern, pos);
                         char c = InputProcessing.ColorToChar(
-                            lRead.GetPixel(x, y), r, g, b);
+                            lRead.GetPixel(x, y), ch.Item1, ch.Item2, ch.Item3);
                         reader.Append(c);
                     }
                 }

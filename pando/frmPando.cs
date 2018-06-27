@@ -67,10 +67,7 @@ namespace pando {
         private async void btnSave_Click(object sender, EventArgs e) {
             bool encrypt = chkEncrypt.Checked;
             string key = encrypt ? txtKey.Text : "";
-
-            bool r = rdbR.Checked;
-            bool g = rdbG.Checked;
-            bool b = rdbB.Checked;
+            string pattern = txtPattern.Text;
 
             assignProcessing(true);
 
@@ -81,7 +78,7 @@ namespace pando {
             });
 
             await Processor.FileToBitmap(encrypt,
-                txtKey.Text, r, g, b, fileCode, img, completed);
+                txtKey.Text, pattern, fileCode, img, completed);
         }
 
         private void btnCancel_Click(object sender, EventArgs e) {
