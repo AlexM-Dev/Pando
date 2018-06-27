@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace pandoCommons {
     public class Processor {
-        public async static Task FileToBitmap(bool encrypt, string pKey, bool r, bool g, bool b, byte[] fileCode, Bitmap img, Action<Bitmap> onComplete) {
-            string key = encrypt ? pKey : "";
-
+        public async static Task FileToBitmap(bool encrypt, string pKey,
+            bool r, bool g, bool b, byte[] fileCode, Bitmap img,
+            Action<Bitmap> onComplete) {
             // Encrypts file if needed to be, and returns a base64 value.
-            string file = InputProcessing.OutValue(fileCode, key, encrypt);
+            string file = InputProcessing.OutValue(fileCode, pKey, encrypt);
 
             // We need to normalise the length of the byte array.
             // I.e., we need to add spaces to get to the closest square number.
@@ -67,6 +70,42 @@ namespace pandoCommons {
 
                 onComplete.Invoke(output);
                 return Task.CompletedTask;
+            });
+        }
+        public async static Task BitmapToFile(Bitmap fileCode, string key, 
+            bool decrypt, bool r, bool g, bool b, string extension, 
+            Action<string, byte[]> onComplete) {
+
+            await Task.Run(() => {
+                // StringBuilder for reading the string. (Base64 of File)
+                StringBuilder reader = new StringBuilder();
+
+                // Bitmap reader of the file.
+                LockBitmap lRead = new LockBitmap(fileCode);
+
+                // Look through each pixel and append it to the
+                // StringBuilder.
+                lRead.LockBits();
+                for (int y = 0; y < lRead.Height; y++) {
+                    for (int x = 0; x < lRead.Width; x++) {
+                        char c = InputProcessing.ColorToChar(
+                            lRead.GetPixel(x, y), r, g, b);
+                        reader.Append(c);
+                    }
+                }
+                lRead.UnlockBits();
+
+                try {
+                    // Decrypt (if necessary) and read file to byte array.
+                    byte[] file = InputProcessing.InValue(reader.ToString(),
+                        key, decrypt);
+
+                    // Invoke further processing on the byte data.
+                    onComplete.Invoke(Path.GetTempFileName() + "." + extension, file);
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             });
         }
     }

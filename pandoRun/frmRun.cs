@@ -33,7 +33,7 @@ namespace pandoRun {
         }
 
         string tempFile = "";
-        private void btnRun_Click(object sender, EventArgs e) {
+        private async void btnRun_Click(object sender, EventArgs e) {
             if (btnRun.Text == "Run") {
                 // Control values.
                 bool r = rdbR.Checked;
@@ -46,47 +46,22 @@ namespace pandoRun {
 
                 assignProcessing(true);
 
-                Thread processor = new Thread(f => {
-                    // StringBuilder for reading the string. (Base64 of File)
-                    StringBuilder reader = new StringBuilder();
+                var completed = new Action<string, byte[]>((s, f) => {
+                    tempFile = s;
+                    File.WriteAllBytes(tempFile, f);
 
-                    // Bitmap reader of the file.
-                    LockBitmap lRead = new LockBitmap(fileCode);
-
-                    lRead.LockBits();
-                    for (int y = 0; y < lRead.Height; y++) {
-                        for (int x = 0; x < lRead.Width; x++) {
-                            char c = InputProcessing.ColorToChar(
-                                lRead.GetPixel(x, y), r, g, b);
-                            reader.Append(c);
-                        }
-                    }
-                    lRead.UnlockBits();
-
-                    try {
-                        // Decrypt (if necessary) and read file to byte array.
-                        byte[] file = InputProcessing.InValue(reader.ToString(),
-                            key, decrypt);
-
-                        // Write file down.
-                        tempFile = Path.GetTempFileName() + "." + extension;
-                        File.WriteAllBytes(tempFile, file);
-
-                        this.InvokeEx(c => {
-                            btnRun.Text = "Finish";
-                            assignProcessing(false);
-                        });
-
-                        var psi = new ProcessStartInfo(tempFile);
-                        psi.UseShellExecute = true;
-                        Process.Start(psi);
-                    } catch (Exception ex) {
-                        MessageBox.Show(ex.Message, "Error", 
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.InvokeEx(c => {
+                        btnRun.Text = "Finish";
                         assignProcessing(false);
-                    }
+                    });
+
+                    var psi = new ProcessStartInfo(tempFile);
+                    psi.UseShellExecute = true;
+                    Process.Start(psi);
                 });
-                processor.Start();
+
+                await Processor.BitmapToFile(fileCode, key, decrypt,
+                    r, g, b, extension, completed);
             } else if (btnRun.Text == "Finish") {
                 try {
                     File.Delete(tempFile);
