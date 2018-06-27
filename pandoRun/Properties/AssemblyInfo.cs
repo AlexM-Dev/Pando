@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("pandoRun")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Pando image file executor.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Alex M.")]
 [assembly: AssemblyProduct("pandoRun")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright © Alex M. 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

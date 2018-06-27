@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRun));
             this.thcMain = new pandoCommons.Discord_ThemeContainer();
+            this.discord_Label1 = new pandoCommons.Discord_Label();
             this.btnRun = new pandoCommons.Discord_Button();
             this.txtExt = new pandoCommons.Discord_TextBox();
             this.rdbB = new pandoCommons.Discord_RadioButton();
@@ -34,7 +35,6 @@
             this.chkDecrypt = new pandoCommons.Discord_CheckBox();
             this.picPando = new System.Windows.Forms.PictureBox();
             this.cbxMain = new pandoCommons.Discord_ControlBox();
-            this.discord_Label1 = new pandoCommons.Discord_Label();
             this.thcMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPando)).BeginInit();
             this.SuspendLayout();
@@ -64,6 +64,18 @@
             this.thcMain.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.thcMain.TabIndex = 0;
             this.thcMain.Text = "Run";
+            // 
+            // discord_Label1
+            // 
+            this.discord_Label1.AutoSize = true;
+            this.discord_Label1.BackColor = System.Drawing.Color.Transparent;
+            this.discord_Label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.discord_Label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(181)))));
+            this.discord_Label1.Location = new System.Drawing.Point(13, 45);
+            this.discord_Label1.Name = "discord_Label1";
+            this.discord_Label1.Size = new System.Drawing.Size(60, 15);
+            this.discord_Label1.TabIndex = 24;
+            this.discord_Label1.Text = "Extension:";
             // 
             // btnRun
             // 
@@ -174,18 +186,6 @@
             this.cbxMain.Size = new System.Drawing.Size(100, 25);
             this.cbxMain.TabIndex = 0;
             // 
-            // discord_Label1
-            // 
-            this.discord_Label1.AutoSize = true;
-            this.discord_Label1.BackColor = System.Drawing.Color.Transparent;
-            this.discord_Label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.discord_Label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(170)))), ((int)(((byte)(181)))));
-            this.discord_Label1.Location = new System.Drawing.Point(13, 45);
-            this.discord_Label1.Name = "discord_Label1";
-            this.discord_Label1.Size = new System.Drawing.Size(60, 15);
-            this.discord_Label1.TabIndex = 24;
-            this.discord_Label1.Text = "Extension:";
-            // 
             // frmRun
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -193,6 +193,7 @@
             this.ClientSize = new System.Drawing.Size(305, 209);
             this.Controls.Add(this.thcMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmRun";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Run";

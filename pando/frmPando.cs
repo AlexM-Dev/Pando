@@ -64,7 +64,7 @@ namespace pando {
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e) {
+        private async void btnSave_Click(object sender, EventArgs e) {
             bool encrypt = chkEncrypt.Checked;
             string key = encrypt ? txtKey.Text : "";
 
@@ -72,69 +72,16 @@ namespace pando {
             bool g = rdbG.Checked;
             bool b = rdbB.Checked;
 
-            // Encrypts file if needed to be, and returns a base64 value.
-            string file = InputProcessing.OutValue(fileCode, key, encrypt);
-
-            // We need to normalise the length of the byte array.
-            // I.e., we need to add spaces to get to the closest square number.
-            int len = (int)Math.Sqrt(file.Length) + 1;
-            len = (len * len) - file.Length;
-
-            // Buffer the string to make it square.
-            file += new string(' ', len);
-
-            // This is the final width and height of the image.
-            int dim = (int)Math.Sqrt(file.Length);
-
-            // Should we layer an image?
-            bool useBmp = img != null;
-
             assignProcessing(true);
 
-            // If we layer the image, stretch the image to the
-            // dimensions of 'dim' x 'dim'. If not, new image.
-            Bitmap bmp = useBmp ?
-                InputProcessing.ResizeImage(img, new Size(dim, dim), false)
-                as Bitmap : new Bitmap(dim, dim);
-            Bitmap output = new Bitmap(dim, dim);
-
-            // Lock our bitmaps for faster processing.
-            LockBitmap lBmp = new LockBitmap(bmp);
-            LockBitmap lOut = new LockBitmap(output);
-            lBmp.LockBits();
-            lOut.LockBits();
-
-            Thread processor = new Thread(f => {
-                for (int i = 0; i < file.Length; i++) {
-                    // We need a formula.
-                    // i % a (i MOD a) = gets the remainder - index in the line.
-                    // i / a (i DIV a) = gets the division - line index.
-                    int x = i % dim;
-                    int y = i / dim;
-
-                    // Convert character to color.
-                    // Basically:
-                    //      -> Character in file string.
-                    //      -> What channel (r, g, b)
-                    //      -> Pixel of image (being used?).
-                    var c = InputProcessing.CharToColor(file[i], r, g, b,
-                         (useBmp ? lBmp.GetPixel(x, y) : (Color?)null));
-
-                    // Set converted color.
-                    lOut.SetPixel(x, y, c);
-                }
-
-                // Open images.
-                lBmp.UnlockBits();
-                lOut.UnlockBits();
-
-                // Save file and open, then set finished.
-                OutputProcessing.Save(fileName, output, false);
+            var completed = new Action<Bitmap>(s => {
+                OutputProcessing.Save(fileName, s, false);
                 assignProcessing(false);
-
                 this.InvokeEx(c => this.Close());
             });
-            processor.Start();
+
+            await Processor.FileToBitmap(encrypt,
+                txtKey.Text, r, g, b, fileCode, img, completed);
         }
 
         private void btnCancel_Click(object sender, EventArgs e) {
