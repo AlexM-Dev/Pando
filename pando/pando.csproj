@@ -103,12 +103,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\panda2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\panda21.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Panda-96.png" />
   </ItemGroup>
   <ItemGroup>
